@@ -14,7 +14,8 @@
       "jsEngine": "jsc"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.DoloMyMites.Forq"
     },
     "android": {
       "adaptiveIcon": {
