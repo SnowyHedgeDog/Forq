@@ -87,12 +87,17 @@ export default function HomeScreen({ navigation }) {
       {/* Popular Restaurants */}
       <Text style={styles.sectionTitle}>Popular Restaurants Near You</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {restaurants.map((restaurant) => (
-          <View key={restaurant.id} style={styles.restaurantCard}>
-            <Image source={{ uri: restaurant.image }} style={styles.restaurantImage} />
-            <Text style={styles.restaurantName}>{restaurant.name}</Text>
-          </View>
-        ))}
+      {restaurants.map((restaurant) => (
+        <TouchableOpacity
+          key={restaurant.id} 
+          onPress={() => navigation.navigate('RestaurantDetail', { restaurantId: restaurant.id })}
+          style={styles.restaurantCard}
+        >
+          <Image source={{ uri: restaurant.image }} style={styles.restaurantImage} />
+          <Text style={styles.restaurantName}>{restaurant.name}</Text>
+        </TouchableOpacity>
+      ))}
+
       </ScrollView>
     </ScrollView>
   );
