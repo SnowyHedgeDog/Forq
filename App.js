@@ -63,8 +63,8 @@ function BottomTabs() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={BottomTabs} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="Landing">
+        <Stack.Screen name="Landing" component={BottomTabs} options={{ headerShown: false }} />
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Log In' }} />
       </Stack.Navigator>
