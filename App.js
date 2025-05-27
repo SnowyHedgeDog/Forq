@@ -4,12 +4,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-// Screens
+// Stack Screens
 import HomeScreen from './screens/HomeScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import LoginScreen from './screens/LoginScreen';
+import RestaurantDetailScreen from './screens/RestaurantDetailScreen';
 
-// Tab Screens (You need to create these placeholder files)
+// Tab Screens
 import DiscoverScreen from './screens/DiscoverScreen';
 import WishlistScreen from './screens/WishlistScreen';
 import BookingsScreen from './screens/BookingsScreen';
@@ -63,10 +64,11 @@ function BottomTabs() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing">
-        <Stack.Screen name="Landing" component={BottomTabs} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={BottomTabs} options={{ headerShown: false }} />
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Log In' }} />
+        <Stack.Screen name="RestaurantDetail" component={RestaurantDetailScreen} options={{ title: 'Restaurant Detail' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
