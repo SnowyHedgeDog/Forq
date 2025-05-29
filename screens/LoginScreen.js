@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Add this at the top
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Image
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 
