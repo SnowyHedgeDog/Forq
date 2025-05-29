@@ -8,13 +8,25 @@ import {
   StyleSheet,
   Image
 } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  /*const handleLogin = () => {
     alert('Logging in...');
+  };*/
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login successful!");
+      navigation.navigate('Home');
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
