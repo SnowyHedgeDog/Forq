@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
+import { useGoogleAuth } from '../authUtils';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { promptAsync, request } = useGoogleAuth();
 
   /*const handleLogin = () => {
     alert('Logging in...');
@@ -65,12 +67,13 @@ export default function LoginScreen({ navigation }) {
       </TouchableOpacity>
       
       {/* Google Login UI */}
-      <TouchableOpacity style={styles.googleBtn}>
+      <TouchableOpacity
+        style={styles.googleBtn}
+        onPress={() => promptAsync()}
+        disabled={!request}
+      >
         <View style={styles.googleContent}>
-          <Image
-            source={require('../assets/GoogleIcon.png')}
-            style={styles.googleIcon}
-          />
+          <Image source={require('../assets/GoogleIcon.png')} style={styles.googleIcon} />
           <Text style={styles.googleText}>Continue with Google</Text>
         </View>
       </TouchableOpacity>
