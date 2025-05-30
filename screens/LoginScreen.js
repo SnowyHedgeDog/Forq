@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Add this at the top
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Image
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
+import { useGoogleAuth } from '../authUtils';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { promptAsync, request } = useGoogleAuth();
 
-  const handleLogin = () => {
+  /*const handleLogin = () => {
     alert('Logging in...');
+  };*/
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login successful!");
+      navigation.navigate('Home');
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
@@ -61,15 +67,15 @@ export default function LoginScreen({ navigation }) {
       </TouchableOpacity>
       
       {/* Google Login UI */}
-      <TouchableOpacity style={styles.googleBtn}>
-        <View style={styles.googleContent}>
-          <Image
-            source={require('../assets/GoogleIcon.png')}
-            style={styles.googleIcon}
-          />
-          <Text style={styles.googleText}>Continue with Google</Text>
-        </View>
-      </TouchableOpacity>
+      <TouchableOpacity
+      style={styles.googleBtn}
+      onPress={() => alert("Google login available in future versions when we're back from Spain in Aug!!")}
+    >
+      <View style={styles.googleContent}>
+        <Image source={require('../assets/GoogleIcon.png')} style={styles.googleIcon} />
+        <Text style={styles.googleText}>Continue with Google</Text>
+      </View>
+    </TouchableOpacity>
 
 
       {/* Login Button */}
