@@ -90,7 +90,8 @@ export default function SignUpScreen({ navigation }) {
     </View>
 
     {/* Google Sign-Up */}
-    <TouchableOpacity style={styles.googleBtn}>
+    <TouchableOpacity style={styles.googleBtn}
+        onPress={() => alert("Google login available in future versions when we're back from Spain in Aug!!")}>
       <View style={styles.googleContent}>
         <Image
           source={require('../assets/GoogleIcon.png')}

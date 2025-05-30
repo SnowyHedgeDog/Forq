@@ -68,15 +68,14 @@ export default function LoginScreen({ navigation }) {
       
       {/* Google Login UI */}
       <TouchableOpacity
-        style={styles.googleBtn}
-        onPress={() => promptAsync()}
-        disabled={!request}
-      >
-        <View style={styles.googleContent}>
-          <Image source={require('../assets/GoogleIcon.png')} style={styles.googleIcon} />
-          <Text style={styles.googleText}>Continue with Google</Text>
-        </View>
-      </TouchableOpacity>
+      style={styles.googleBtn}
+      onPress={() => alert("Google login available in future versions when we're back from Spain in Aug!!")}
+    >
+      <View style={styles.googleContent}>
+        <Image source={require('../assets/GoogleIcon.png')} style={styles.googleIcon} />
+        <Text style={styles.googleText}>Continue with Google</Text>
+      </View>
+    </TouchableOpacity>
 
 
       {/* Login Button */}
