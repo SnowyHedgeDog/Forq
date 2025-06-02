@@ -8,22 +8,31 @@ import { db } from '../firebaseConfig';
 
 export default function HomeScreen({ navigation }) {
   const [restaurants, setRestaurants] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
+    const fetchData = async () => {
       try {
-        const snapshot = await getDocs(collection(db, 'restaurants'));
-        const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setRestaurants(list);
+        //const snapshot = await getDocs(collection(db, 'restaurants'));
+        //const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        const restaurantSnapshot = await getDocs(collection(db, 'restaurants'));
+        const categorySnapshot = await getDocs(collection(db, 'categories'));
+
+        const restaurantsList = restaurantSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const categoriesList = categorySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setRestaurants(restaurantsList);
+        setCategories(categoriesList.sort((a, b) => a.order - b.order)); // optional sorting
+
       } catch (error) {
         console.error("Error fetching restaurants:",  error.message, error.code);
       }
     };
 
-    fetchRestaurants();
+    fetchData();
   }, []);
 
-  console.log("Restaurants data:", restaurants);
+  console.log("Restaurants data:", restaurants, categories);
 
   return (
     <ScrollView style={styles.container}>
@@ -75,17 +84,24 @@ export default function HomeScreen({ navigation }) {
         <Text style={styles.sectionArrow}>›</Text>
       </View>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
-        {['Sushi', 'Hotpot', 'Indian', 'BBQ'].map((item, index) => (
-          <View key={index} style={styles.categoryItem}>
-            <Image source={{ uri: 'https://via.placeholder.com/60' }} style={styles.categoryImage} />
-            <Text style={styles.categoryText}>{item}</Text>
-          </View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {categories.map((cat) => (
+          <TouchableOpacity key={cat.id} onPress={() => setSelectedCategory(cat.name)}>
+            <View style={styles.categoryItem}>
+              <Image source={{ uri: cat.image }} style={styles.categoryImage} />
+
+              <Text style={styles.categoryText}>{cat.name}</Text>
+            </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
 
+
       {/* Popular Restaurants */}
-      <Text style={styles.sectionTitle}>Popular Restaurants Near You</Text>
+      <View style={{ marginTop: 12, marginBottom: 12 }}>
+        <Text style={styles.sectionTitle}>Popular Restaurants Near You</Text>
+      </View>
+
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {restaurants.map((restaurant) => (
         <TouchableOpacity
@@ -181,7 +197,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   categoryText: {
-    fontSize: 12,
+    fontSize: 14,
   },
   restaurantCard: {
     width: 120,
