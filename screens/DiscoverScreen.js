@@ -9,6 +9,7 @@ import * as Location from 'expo-location';
 
 export default function DiscoverScreen({ navigation }) {
   const [restaurants, setRestaurants] = useState([]);
+  const [locationPermission, setLocationPermission] = useState(null);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -31,6 +32,14 @@ export default function DiscoverScreen({ navigation }) {
       }
     })();
   }, []);
+
+  if (locationPermission === null || restaurants.length === 0) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>Loading map and restaurants...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -73,8 +82,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#fff'
   },
   header: {
     position: 'absolute',
@@ -93,4 +104,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff'
+  },
+  
 });
