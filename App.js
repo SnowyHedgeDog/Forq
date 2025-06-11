@@ -14,6 +14,7 @@ import HomeScreen from './screens/HomeScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import LoginScreen from './screens/LoginScreen';
 import RestaurantDetailScreen from './screens/RestaurantDetailScreen';
+import SearchScreen from './screens/SearchScreen';
 
 // Tab Screens
 import DiscoverScreen from './screens/DiscoverScreen';
@@ -83,6 +84,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Log In' }} />
         <Stack.Screen name="RestaurantDetail" component={RestaurantDetailScreen} options={{ title: 'Restaurant Detail' }} />
+        <Stack.Screen name="SearchScreen" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

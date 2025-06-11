@@ -40,7 +40,12 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.searchWrapper}>
         <View style={styles.searchContainer}>
           <Ionicons name="search" size={20} color="#999" style={{ marginRight: 8 }} />
-          <TextInput placeholder="Search" style={styles.searchInput} />
+          <TouchableOpacity
+            style={styles.fakeSearchInput}
+            onPress={() => navigation.navigate('SearchScreen')}
+          >
+            <Text style={{ color: '#888' }}>Search e.g. Laksa or Sushi</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Ionicons name="person-circle-outline" size={28} color="#444" />
           </TouchableOpacity>
@@ -134,9 +139,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 16,
   },
-  searchInput: {
+  fakeSearchInput: {
     flex: 1,
     height: 40,
+    justifyContent: 'center',
   },
   actionButtons: {
     flexDirection: 'row',
@@ -233,11 +239,4 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     justifyContent: 'space-between', // pushes profile icon to right
   },
-  
-  searchInput: {
-    flex: 1,
-    height: 40,
-    marginRight: 8,
-  }
-  
 });
